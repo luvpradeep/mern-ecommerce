@@ -1,5 +1,23 @@
-node_modules
-.env
-dist
+# Dependencies
+client/node_modules
+server/node_modules
+
+# Environment files
+client/.env
+server/.env
+
+# Build folders
+client/dist
+server/dist
 build
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
 .vscode
+.idea

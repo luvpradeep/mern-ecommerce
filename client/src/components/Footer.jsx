@@ -89,7 +89,7 @@ function Footer() {
             <FaLinkedinIn />
           </a>
 
-          <a href="https://github.com/">
+          <a href="https://github.com/luvpradeep">
             <FaGithub />
           </a>
 
