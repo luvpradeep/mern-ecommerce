@@ -1,0 +1,663 @@
+/* ===================================
+   GOOGLE FONT
+=================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+input[type="password"]::-ms-reveal{
+    display:none;
+}
+
+input[type="password"]::-ms-clear{
+    display:none;
+}
+
+/* ===================================
+   PAGE
+=================================== */
+
+.auth-page{
+
+    min-height:100vh;
+
+    display:grid;
+
+    grid-template-columns:1fr 520px;
+
+    background:#f4f7fb;
+
+}
+
+/* ===================================
+   LEFT
+=================================== */
+
+.auth-left{
+
+    background:linear-gradient(135deg,#2563eb,#1e3a8a);
+
+    color:#fff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:60px;
+
+    text-align:center;
+
+}
+
+.auth-logo{
+
+    font-size:90px;
+
+    margin-bottom:25px;
+
+}
+
+.auth-left h1{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+.auth-left p{
+
+    max-width:420px;
+
+    line-height:1.8;
+
+    font-size:17px;
+
+    opacity:.95;
+
+}
+
+/* ===================================
+   RIGHT
+=================================== */
+
+.auth-right{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:30px;
+
+}
+
+/* ===================================
+   CARD
+=================================== */
+
+.auth-card{
+
+    width:100%;
+
+    max-width:450px;
+
+    background:#fff;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+    animation:fadeUp .5s ease;
+
+}
+
+.auth-card h2{
+
+    font-size:2rem;
+
+    color:#1e293b;
+
+}
+
+.auth-card>p{
+
+    color:#64748b;
+
+    margin-top:8px;
+
+    margin-bottom:30px;
+
+}
+
+/* ===================================
+   FORM
+=================================== */
+
+.auth-card form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+/* ===================================
+   INPUT
+=================================== */
+
+.auth-input{
+
+    position:relative;
+
+}
+
+.auth-input input{
+
+    width:100%;
+
+    height:56px;
+
+    border:1px solid #dbe2ea;
+
+    border-radius:14px;
+
+    padding-left:48px;
+
+    padding-right:50px;
+
+    font-size:15px;
+
+    transition:.25s;
+
+    outline:none;
+
+}
+
+.auth-input input:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+.auth-input svg:first-child{
+
+    position:absolute;
+
+    left:16px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#64748b;
+
+}
+
+/* ===================================
+   EYE BUTTON
+=================================== */
+
+.eye-btn{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    background:none;
+
+    border:none;
+
+    cursor:pointer;
+
+    color:#555;
+
+    font-size:17px;
+
+}
+
+/* ===================================
+   BUTTON
+=================================== */
+
+.auth-btn{
+
+    height:55px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.auth-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+/* ===================================
+   FOOTER
+=================================== */
+
+.auth-footer{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#555;
+
+}
+
+.auth-footer a{
+
+    margin-left:6px;
+
+    text-decoration:none;
+
+    color:#2563eb;
+
+    font-weight:600;
+
+}
+
+.auth-footer a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ===================================
+   MESSAGE
+=================================== */
+
+.message{
+
+    padding:12px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.message.success{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.message.error{
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+}
+
+/* ===================================
+   PASSWORD STRENGTH
+=================================== */
+
+.strength{
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.strength.weak{
+
+    color:#dc2626;
+
+}
+
+.strength.medium{
+
+    color:#f59e0b;
+
+}
+
+.strength.strong{
+
+    color:#16a34a;
+
+}
+
+/* ===================================
+   PASSWORD MATCH
+=================================== */
+
+.password-match{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#16a34a;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.password-not-match{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#dc2626;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+/* ===================================
+   FORGOT PASSWORD
+=================================== */
+
+.auth-extra{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:-8px;
+
+}
+
+.auth-extra a{
+
+    text-decoration:none;
+
+    color:#2563eb;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.auth-extra a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================
+   BACK BUTTON
+========================== */
+
+.back-link{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:25px;
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.back-link:hover{
+
+    color:#1d4ed8;
+
+    transform:translateX(-4px);
+
+}
+
+/* ==========================
+   BUTTON ICON
+========================== */
+
+.auth-btn svg{
+
+    vertical-align:middle;
+
+}
+
+/* OTP */
+
+.otp-container{
+display:flex;
+justify-content:center;
+gap:12px;
+margin:25px 0;
+}
+
+.otp-container input{
+width:55px;
+height:60px;
+border:2px solid #dbe4f0;
+border-radius:12px;
+font-size:26px;
+font-weight:700;
+text-align:center;
+outline:none;
+transition:.25s;
+}
+
+.otp-container input:focus{
+border-color:#2563eb;
+box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.otp-timer{
+margin-top:20px;
+text-align:center;
+color:#666;
+font-size:15px;
+}
+
+.resend-btn{
+margin-top:18px;
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:#fff;
+font-weight:600;
+cursor:pointer;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+}
+
+.resend-btn:hover{
+background:#1d4ed8;
+}
+
+/* PASSWORD STRENGTH */
+
+.strength-wrapper{
+margin:15px 0;
+}
+
+.strength-bar{
+height:8px;
+border-radius:10px;
+margin-bottom:10px;
+transition:.3s;
+}
+
+.strength-bar.weak{
+width:33%;
+background:#ef4444;
+}
+
+.strength-bar.medium{
+width:66%;
+background:#f59e0b;
+}
+
+.strength-bar.strong{
+width:100%;
+background:#16a34a;
+}
+
+.match{
+display:block;
+margin:12px 0;
+color:#16a34a;
+font-weight:600;
+}
+
+.not-match{
+display:block;
+margin:12px 0;
+color:#ef4444;
+font-weight:600;
+}
+
+/* ===================================
+   ANIMATION
+=================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===================================
+   TABLET
+=================================== */
+
+@media(max-width:992px){
+
+.auth-page{
+
+    grid-template-columns:1fr;
+
+}
+
+.auth-left{
+
+    display:none;
+
+}
+
+.auth-right{
+
+    padding:25px;
+
+}
+
+}
+
+/* ===================================
+   MOBILE
+=================================== */
+
+@media(max-width:576px){
+
+.auth-card{
+
+    padding:25px;
+
+    border-radius:18px;
+
+}
+
+.auth-card h2{
+
+    font-size:1.7rem;
+
+}
+
+.auth-input input{
+
+    height:52px;
+
+    font-size:14px;
+
+}
+
+.auth-btn{
+
+    height:52px;
+
+}
+
+}

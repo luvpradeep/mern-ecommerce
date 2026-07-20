@@ -1,0 +1,12 @@
+.admin-layout-content {
+  min-height: calc(100vh - 70px);
+  padding: 30px;
+  background: #f8fafc;
+}
+
+@media (max-width: 768px) {
+  .admin-layout-content {
+    min-height: calc(100vh - 65px);
+    padding: 20px;
+  }
+}

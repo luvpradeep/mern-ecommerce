@@ -1,0 +1,682 @@
+/* ===========================
+   CART PAGE
+=========================== */
+
+.cart-container{
+    width:100%;
+    max-width:1500px;
+    margin:auto;
+    padding:30px 25px 60px;
+    background:#f6f8fb;
+    min-height:100vh;
+}
+
+/* ===========================
+   TITLE
+=========================== */
+
+.cart-title{
+    font-size:2.2rem;
+    font-weight:700;
+    color:#1f2937;
+    margin-bottom:30px;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.cart-layout{
+    display:grid;
+    grid-template-columns:2fr 380px;
+    gap:30px;
+    align-items:start;
+}
+
+/* ===========================
+   PRODUCTS GRID
+=========================== */
+
+.cart-items{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.cart-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 28px rgba(0,0,0,.08);
+    transition:.25s;
+    display:flex;
+    flex-direction:column;
+}
+
+.cart-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+.cart-image{
+    width:100%;
+    height:220px;
+    object-fit:contain;
+    background:#fafafa;
+    padding:20px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.cart-image:hover{
+    transform:scale(1.05);
+}
+
+/* ===========================
+   INFO
+=========================== */
+
+.cart-info{
+    display:flex;
+    flex-direction:column;
+    padding:18px;
+    gap:10px;
+}
+
+.cart-product-title{
+    font-size:1.2rem;
+    font-weight:700;
+    color:#222;
+    cursor:pointer;
+    transition:.25s;
+    line-height:1.4;
+}
+
+.cart-product-title:hover{
+    color:#0d6efd;
+}
+
+.category{
+    color:#777;
+    font-size:.95rem;
+}
+
+.cart-info h2{
+    color:#16a34a;
+    font-size:1.5rem;
+}
+
+/* ===========================
+   STOCK
+=========================== */
+
+.stock-text{
+    font-size:.9rem;
+    color:#666;
+}
+
+/* ===========================
+   QUANTITY
+=========================== */
+
+.qty-box{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:5px;
+}
+
+.qty-box button{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:10px;
+    background:#0d6efd;
+    color:#fff;
+    font-size:20px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.qty-box button:hover:not(:disabled){
+    background:#0b5ed7;
+}
+
+.qty-box button:disabled{
+    background:#d1d5db;
+    cursor:not-allowed;
+}
+
+.qty-box span{
+    font-size:1.1rem;
+    font-weight:700;
+    min-width:25px;
+    text-align:center;
+}
+
+/* ===========================
+   REMOVE
+=========================== */
+
+.remove-btn{
+    margin-top:10px;
+    border:none;
+    background:#ef4444;
+    color:#fff;
+    padding:12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.25s;
+}
+
+.remove-btn:hover{
+    background:#dc2626;
+}
+
+/* ===========================
+   SUMMARY
+=========================== */
+
+.summary-card{
+    position:sticky;
+    top:90px;
+    background:#fff;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.summary-card h2{
+    margin-bottom:25px;
+    color:#111827;
+}
+
+/* ===========================
+   SUMMARY ROW
+=========================== */
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    font-size:1.05rem;
+    border-bottom:1px solid #ececec;
+}
+
+.summary-row:last-child{
+    border-bottom:none;
+}
+
+/* ===========================
+   CHECKOUT
+=========================== */
+
+.checkout-btn{
+    width:100%;
+    margin-top:30px;
+    border:none;
+    background:#16a34a;
+    color:#fff;
+    padding:15px;
+    border-radius:12px;
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.checkout-btn:hover{
+    background:#15803d;
+    transform:translateY(-2px);
+}
+
+/* ===========================
+   EMPTY CART
+=========================== */
+
+.empty-cart{
+    background:#fff;
+    border-radius:20px;
+    padding:80px 30px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.empty-cart h2{
+    margin-bottom:25px;
+    color:#555;
+}
+
+.shop-btn{
+    background:#0d6efd;
+    color:#fff;
+    border:none;
+    padding:14px 30px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:1rem;
+    font-weight:600;
+    transition:.25s;
+}
+
+.shop-btn:hover{
+    background:#0b5ed7;
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width:1100px){
+
+.cart-layout{
+
+grid-template-columns:1fr;
+
+}
+
+.summary-card{
+
+position:static;
+
+width:100%;
+
+}
+
+.cart-items{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:768px){
+
+.cart-container{
+
+padding:15px;
+
+}
+
+.cart-title{
+
+font-size:1.7rem;
+
+margin-bottom:20px;
+
+text-align:center;
+
+}
+
+.cart-items{
+
+display:flex;
+
+flex-direction:column;
+
+gap:18px;
+
+}
+
+/* Horizontal Card */
+
+.cart-card{
+
+display:flex;
+
+flex-direction:row;
+
+align-items:center;
+
+padding:12px;
+
+border-radius:16px;
+
+}
+
+/* Left Image */
+
+.cart-image{
+
+width:50%;
+
+height:50%;
+
+padding:8px;
+
+flex-shrink:0;
+
+border-radius:12px;
+
+}
+
+/* Right Details */
+
+.cart-info{
+
+padding:0 0 0 15px;
+
+flex:1;
+
+display:flex;
+
+flex-direction:column;
+
+gap:8px;
+
+}
+
+.cart-product-title{
+
+font-size:1rem;
+
+line-height:1.4;
+
+}
+
+.category{
+
+font-size:.85rem;
+
+}
+
+.cart-info h2{
+
+font-size:1.2rem;
+
+}
+
+.stock-text{
+
+font-size:.8rem;
+
+}
+
+/* Quantity */
+
+.qty-box{
+
+gap:10px;
+
+margin-top:5px;
+
+}
+
+.qty-box button{
+
+width:34px;
+
+height:34px;
+
+font-size:18px;
+
+}
+
+.qty-box span{
+
+font-size:1rem;
+
+}
+
+/* Remove */
+
+.remove-btn{
+
+margin-top:5px;
+
+padding:10px;
+
+font-size:.9rem;
+
+}
+
+/* Summary */
+
+.summary-card{
+
+margin-top:25px;
+
+padding:22px;
+
+border-radius:16px;
+
+}
+
+.summary-card h2{
+
+font-size:1.3rem;
+
+}
+
+.summary-row{
+
+font-size:.95rem;
+
+}
+
+.checkout-btn{
+
+padding:14px;
+
+font-size:1rem;
+
+}
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width:480px){
+
+.cart-container{
+
+padding:10px;
+
+}
+
+.cart-title{
+
+font-size:1.5rem;
+
+}
+
+.cart-card{
+
+padding:10px;
+
+gap:10px;
+
+}
+
+.cart-image{
+
+width:90px;
+
+height:90px;
+
+}
+
+.cart-product-title{
+
+font-size:.95rem;
+
+}
+
+.category{
+
+display:none;
+
+}
+
+.cart-info h2{
+
+font-size:1.1rem;
+
+}
+
+.stock-text{
+
+font-size:.75rem;
+
+}
+
+.qty-box{
+
+gap:8px;
+
+}
+
+.qty-box button{
+
+width:30px;
+
+height:30px;
+
+font-size:16px;
+
+}
+
+.qty-box span{
+
+font-size:.95rem;
+
+}
+
+.remove-btn{
+
+padding:8px;
+
+font-size:.85rem;
+
+}
+
+.summary-card{
+
+padding:18px;
+
+}
+
+.checkout-btn{
+
+padding:12px;
+
+font-size:.95rem;
+
+}
+
+}
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width:1400px){
+
+.cart-layout{
+
+grid-template-columns:3fr 420px;
+
+}
+
+.cart-items{
+
+grid-template-columns:repeat(3,1fr);
+
+gap:30px;
+
+}
+
+.cart-image{
+
+height:260px;
+
+}
+
+.cart-product-title{
+
+font-size:1.35rem;
+
+}
+
+.summary-card{
+
+padding:35px;
+
+}
+
+}
+
+
+/* ==========================================
+   SMOOTH ANIMATIONS
+========================================== */
+
+.cart-card,
+.summary-card,
+.cart-image,
+.checkout-btn,
+.remove-btn,
+.qty-box button{
+
+transition:all .25s ease;
+
+}
+
+.cart-card:hover{
+
+transform:translateY(-6px);
+
+}
+
+.checkout-btn:active,
+.remove-btn:active,
+.qty-box button:active{
+
+transform:scale(.96);
+
+}
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.cart-items::-webkit-scrollbar{
+
+width:8px;
+
+}
+
+.cart-items::-webkit-scrollbar-thumb{
+
+background:#d1d5db;
+
+border-radius:20px;
+
+}
+
+.cart-items::-webkit-scrollbar-track{
+
+background:transparent;
+
+}

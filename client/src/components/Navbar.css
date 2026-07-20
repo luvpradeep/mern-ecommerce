@@ -1,0 +1,465 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 28px;
+
+  background: rgba(2, 6, 23, 0.95);
+  backdrop-filter: blur(20px);
+
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+
+  background: linear-gradient(135deg,#60a5fa,#8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ===========================
+   DESKTOP LINKS
+=========================== */
+
+.desktop-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.desktop-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  transition: .3s;
+}
+
+.desktop-links a:hover {
+  background: rgba(255,255,255,.08);
+  color: #38bdf8;
+}
+
+/* ===========================
+   BADGES
+=========================== */
+
+.badge-link {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+
+  top: -5px;
+  right: -6px;
+
+  width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ===========================
+   PROFILE
+=========================== */
+
+.profile-menu {
+  position: relative;
+}
+
+.profile-circle {
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #f97316;
+  color: white;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  position: absolute;
+
+  right: 0;
+  top: 55px;
+
+  width: 230px;
+
+  background: white;
+
+  border-radius: 14px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,.12);
+
+  padding: 15px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: .25s;
+}
+
+.profile-menu:hover .profile-dropdown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-dropdown p {
+  font-weight: 700;
+  color: #0f172a;
+
+  margin-bottom: 10px;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+  width: 100%;
+
+  display: block;
+
+  padding: 10px;
+
+  margin-top: 5px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #334155;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  text-align: left;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+  background: #f1f5f9;
+}
+
+/* ===========================
+   ADMIN LINK
+=========================== */
+
+.admin-link {
+  background: #f97316 !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.admin-link:hover {
+  background: #ea580c !important;
+}
+
+/* ===========================
+   MOBILE PROFILE
+=========================== */
+
+.mobile-user {
+  display: none;
+}
+
+.mobile-profile {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f97316;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: bold;
+}
+
+.mobile-login {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===========================
+   MENU BUTTON
+=========================== */
+
+.menu-btn {
+  display: none;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+/* ===========================
+   OVERLAY
+=========================== */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,.45);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: .3s;
+
+  z-index: 998;
+}
+
+.overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar {
+  position: fixed;
+
+  top: 0;
+  left: -100%;
+
+  width: 280px;
+  max-width: 85vw;
+
+  height: 100vh;
+
+  background: #0f172a;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: .35s;
+
+  z-index: 1000;
+
+  box-shadow: 10px 0 30px rgba(0,0,0,.35);
+
+  overflow-y: auto;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 22px;
+}
+
+.sidebar-logo {
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+
+  color: white;
+
+  font-size: 26px;
+
+  cursor: pointer;
+}
+
+.sidebar-content {
+  flex: 1;
+  padding: 12px;
+}
+
+.sidebar-content a {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 14px 16px;
+
+  margin-bottom: 8px;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  transition: .3s;
+
+  position: relative;
+}
+
+.sidebar-content a svg {
+  font-size: 20px;
+}
+
+.sidebar-content a:hover {
+  background: #1e293b;
+  color: #38bdf8;
+}
+
+.mobile-badge {
+  position: absolute;
+
+  right: 18px;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+}
+
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.sidebar-logout {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 14px 16px;
+
+  background: transparent;
+
+  border: none;
+  border-radius: 12px;
+
+  color: #ff6b6b;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.sidebar-logout:hover {
+  background: #1e293b;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+
+  .menu-btn{
+    display:block;
+  }
+
+  .desktop-links{
+    display:none;
+  }
+
+  .mobile-user{
+    display:flex;
+    align-items:center;
+  }
+
+  .navbar{
+    padding:14px 18px;
+  }
+
+  .logo{
+    flex:1;
+    text-align:center;
+    font-size:2rem;
+  }
+
+  .sidebar{
+    width:260px;
+  }
+}
+
+/* ===========================
+   DESKTOP
+=========================== */
+
+@media (min-width:769px){
+
+  .menu-btn,
+  .sidebar,
+  .overlay{
+    display:none;
+  }
+}

@@ -1,0 +1,432 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===========================
+   PAGE
+=========================== */
+
+.pd-product-details-container {
+  max-width: 1300px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* ===========================
+   MESSAGE
+=========================== */
+
+.message {
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  animation: fadeIn .3s;
+}
+
+.success-message {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.error-message {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+@keyframes fadeIn {
+  from{
+    opacity:0;
+    transform:translateY(-8px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* ===========================
+   PRODUCT CARD
+=========================== */
+
+.pd-product-card{
+  display:flex;
+  gap:40px;
+  background:#fff;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:35px;
+}
+
+.pd-product-image{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.pd-product-image img{
+  width:100%;
+  max-width:450px;
+  height:420px;
+  object-fit:contain;
+  border-radius:12px;
+}
+
+.pd-product-info{
+  flex:1;
+}
+
+.pd-product-info h1{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.pd-rating-text{
+  color:#666;
+  margin:12px 0;
+}
+
+.pd-category{
+  color:#2563eb;
+  margin:12px 0;
+}
+
+.pd-price{
+  color:#e11d48;
+  font-size:34px;
+  margin:20px 0;
+}
+
+.pd-stock{
+  font-weight:600;
+  margin-bottom:20px;
+}
+
+.pd-available{
+  color:#16a34a;
+}
+
+.pd-out{
+  color:#dc2626;
+}
+
+.pd-description{
+  color:#444;
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+/* ===========================
+   QTY
+=========================== */
+
+.pd-qty-box{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.pd-qty-box button{
+  width:40px;
+  height:40px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:20px;
+}
+
+.pd-qty-box span{
+  font-size:20px;
+  font-weight:600;
+  min-width:30px;
+  text-align:center;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.pd-action-buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.pd-cart-btn,
+.pd-wishlist-btn,
+.pd-submit-review-btn{
+
+  border:none;
+  padding:14px 22px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:600;
+  transition:.3s;
+}
+
+.pd-cart-btn{
+  background:#2563eb;
+  color:white;
+}
+
+.pd-cart-btn:hover{
+  background:#1d4ed8;
+}
+
+.pd-wishlist-btn{
+  background:#f97316;
+  color:white;
+}
+
+.pd-wishlist-btn:hover{
+  background:#ea580c;
+}
+
+.pd-submit-review-btn{
+  width:100%;
+  margin-top:15px;
+  background:#16a34a;
+  color:white;
+}
+
+.pd-submit-review-btn:hover{
+  background:#15803d;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+/* ===========================
+   REVIEWS
+=========================== */
+
+.pd-reviews-wrapper{
+  margin-top:40px;
+}
+
+.pd-reviews-wrapper h2{
+  margin-bottom:20px;
+}
+
+.pd-review-card{
+  background:white;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.pd-review-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.pd-review-card p{
+  margin:10px 0;
+  line-height:1.6;
+}
+
+.pd-review-card small{
+  color:#666;
+}
+
+.pd-empty-review{
+  background:#f8fafc;
+  padding:25px;
+  border-radius:10px;
+  text-align:center;
+}
+
+/* ===========================
+   REVIEW FORM
+=========================== */
+
+.pd-review-form-container{
+
+  background:white;
+
+  margin-top:40px;
+
+  padding:30px;
+
+  border-radius:18px;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.pd-review-form-container h2{
+  margin-bottom:20px;
+}
+
+.pd-review-form{
+  display:flex;
+  flex-direction:column;
+}
+
+.pd-review-form label{
+  font-weight:600;
+  margin-top:12px;
+  margin-bottom:8px;
+}
+
+.pd-review-form select,
+.pd-review-form textarea{
+
+  padding:14px;
+
+  border:1px solid #d1d5db;
+
+  border-radius:10px;
+
+  font-size:15px;
+}
+
+.pd-review-form textarea{
+  resize:vertical;
+  min-height:140px;
+}
+
+.pd-login-message{
+  color:#dc2626;
+  font-weight:600;
+}
+
+/* ===========================
+   LOADING
+=========================== */
+
+.pd-loading{
+  text-align:center;
+  margin-top:100px;
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:992px){
+
+.pd-product-card{
+flex-direction:column;
+}
+
+.pd-product-image img{
+
+max-width:380px;
+
+height:350px;
+}
+
+.pd-product-info h1{
+font-size:28px;
+}
+
+.pd-price{
+font-size:30px;
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.pd-product-details-container{
+padding:15px;
+}
+
+.pd-product-card{
+padding:20px;
+gap:20px;
+}
+
+.pd-product-image img{
+height:260px;
+}
+
+.pd-product-info h1{
+font-size:24px;
+}
+
+.pd-price{
+font-size:28px;
+}
+
+.pd-action-buttons{
+flex-direction:column;
+}
+
+.pd-cart-btn,
+.pd-wishlist-btn{
+width:100%;
+}
+
+.pd-qty-box{
+justify-content:center;
+}
+
+.pd-review-top{
+flex-direction:column;
+align-items:flex-start;
+gap:10px;
+}
+
+.pd-review-form-container{
+padding:20px;
+}
+
+.pd-review-form textarea{
+min-height:120px;
+}
+
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media(max-width:480px){
+
+.pd-product-info h1{
+font-size:22px;
+}
+
+.pd-product-image img{
+height:220px;
+}
+
+.pd-price{
+font-size:24px;
+}
+
+.pd-qty-box button{
+width:35px;
+height:35px;
+}
+
+.pd-cart-btn,
+.pd-wishlist-btn,
+.pd-submit-review-btn{
+font-size:15px;
+padding:12px;
+}
+
+}

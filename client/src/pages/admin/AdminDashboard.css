@@ -1,0 +1,291 @@
+.admin-dashboard-page{
+    background:#f4f7fb;
+    min-height:100vh;
+    padding:35px 20px;
+}
+
+.admin-dashboard-container{
+    max-width:1400px;
+    margin:auto;
+}
+
+.admin-title{
+    font-size:2.2rem;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:30px;
+}
+
+/*==========================
+  CARDS
+==========================*/
+
+.admin-stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+
+    margin-bottom:40px;
+}
+
+.dashboard-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.07);
+
+    transition:.3s;
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+.card-icon{
+
+    width:65px;
+    height:65px;
+
+    border-radius:18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+    color:white;
+
+    flex-shrink:0;
+}
+
+.dashboard-card h2{
+
+    font-size:2rem;
+
+    margin-bottom:6px;
+
+    color:#111827;
+}
+
+.dashboard-card p{
+
+    color:#6b7280;
+
+    font-weight:600;
+}
+
+/*Card Color*/
+
+.products-card .card-icon{
+    background:#2563eb;
+}
+
+.instock-card .card-icon{
+    background: #22c55e;
+}
+
+.stock-card .card-icon{
+    background:#f97316;
+}
+
+.out-card .card-icon{
+    background: #ef4444;
+}
+
+.users-card .card-icon{
+    background:#06b6d4;
+}
+
+.customer-card .card-icon{
+    background: #14b8a6;
+}
+
+.admin-card .card-icon{
+    background: #7c3aed;
+}
+
+.average-card .card-icon{
+    background: #f97316;
+}
+
+.orders-card .card-icon{
+    background:#8b5cf6;
+}
+
+.delivered-card .card-icon{
+    background:#22c55e;
+}
+
+.pending-card .card-icon{
+    background:#ef4444;
+}
+
+.revenue-card .card-icon{
+    background:#16a34a;
+}
+
+
+.products-card{
+  border-left:6px solid #2563eb;
+  background: #eff6ff;
+}
+
+.instock-card{
+    border-left:6px solid #22c55e;
+    background:#f0fdf4;
+}
+
+.stock-card{
+    border-left: 6px solid #f97316;
+    background: #fff6eb;
+}
+
+.out-card{
+    border-left:6px solid #ef4444;
+    background:#fef2f2;
+}
+
+.users-card{
+    border-left: 6px solid #06b6d4;
+    background: #ecfeff;
+}
+
+.customer-card{
+    border-left:6px solid #14b8a6;
+    background:#ecfeff;
+}
+
+.admin-card{
+    border-left:6px solid #7c3aed;
+    background:#f5f3ff;
+}
+
+.average-card{
+    border-left: 6px solid #f97316;
+    background: #fff6eb;
+}
+
+.orders-card{
+  border-left:6px solid #8b5cf6;
+  background: #f5f3ff;
+}
+
+.delivered-card{
+    border-left:6px solid #22c55e;
+    background:#f0fdf4;
+}
+
+.pending-card{
+    border-left:6px solid #ef4444;
+    background:#fef2f2;
+}
+
+.revenue-card{
+    border-left:6px solid #16a34a;
+    background: #f0fdf4;
+}
+
+
+/*==========================
+  CHART
+==========================*/
+
+.chart-wrapper{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.06);
+}
+
+.chart-wrapper h2{
+
+    margin-bottom:20px;
+
+    color:#111827;
+
+    font-size:1.5rem;
+}
+
+/*==========================
+  TABLET
+==========================*/
+
+@media(max-width:992px){
+
+.admin-dashboard-page{
+    padding:25px 18px;
+}
+
+.admin-title{
+    font-size:2rem;
+}
+
+.admin-stats-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/*==========================
+ MOBILE
+==========================*/
+
+@media(max-width:768px){
+
+.dashboard-card{
+
+    flex-direction:column;
+
+    text-align:center;
+
+    gap:15px;
+}
+
+.card-icon{
+
+    width:60px;
+    height:60px;
+
+    font-size:26px;
+}
+
+.dashboard-card h2{
+
+    font-size:1.8rem;
+}
+
+.admin-stats-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* Laptop */
+@media (min-width:993px){
+
+.admin-stats-grid{
+    grid-template-columns:repeat(4,1fr);
+}
+
+}

@@ -1,0 +1,203 @@
+/* ==========================
+   HOME PAGE
+========================== */
+
+.home-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0;
+  background: #f8fafc;
+  min-height: 100vh;
+}
+
+/* ==========================
+   HERO SECTION
+========================== */
+
+.hero-section {
+  height: 400px;
+  background: linear-gradient(
+    135deg,
+    #0f172a,
+    #1e293b
+  );
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+.hero-btn {
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  background: #f97316;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* ==========================
+   SEARCH FILTER
+========================== */
+
+.search-filter {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.search-input,
+.filter-select {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  min-width: 220px;
+  font-size: 15px;
+  outline: none;
+}
+
+.search{
+  width: 40%;
+}
+
+.search-input:focus,
+.filter-select:focus {
+  border-color: #f97316;
+}
+
+/* ==========================
+   SECTION TITLE
+========================== */
+
+.section-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1e293b;
+}
+
+/* ==========================
+   PRODUCTS GRID
+========================== */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.products-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ==========================
+   PAGINATION
+========================== */
+
+.pagination {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.page-btn:hover {
+  transform: scale(1.1);
+}
+
+.active-page {
+  background: #f97316;
+  color: white;
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media (max-width: 992px) {
+
+  .hero-content h1 {
+    font-size: 2.3rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 768px) {
+
+  .home-container {
+    width: 100%;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+  .hero-section {
+    width: 100%;
+    height: 280px;
+    padding: 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .search-filter {
+    flex-direction: column;
+  }
+
+  .search-input,
+  .filter-select {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}

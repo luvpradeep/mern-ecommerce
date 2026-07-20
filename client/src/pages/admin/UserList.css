@@ -1,0 +1,54 @@
+@import "./OrderList.css";
+
+.user-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin:25px 0;
+}
+
+.user-stat-card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:6px;
+  height:100%;
+  border-radius:20px;
+}
+
+.user-stat-card:nth-child(1)::before{
+  background:#2563eb;
+}
+
+.user-stat-card:nth-child(2)::before{
+  background:#22c55e;
+}
+
+.user-stat-card:nth-child(3)::before{
+  background:#f97316;
+}
+
+
+.action-buttons{
+  display:flex;
+  gap:12px;
+  width:100%;
+}
+
+.action-buttons button{
+  flex:1;
+}
+
+@media (max-width:768px){
+
+    .user-stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+
+    /* Total Users */
+    .user-stat-card:first-child{
+        grid-column:1 / -1;
+    }
+}
