@@ -14,16 +14,21 @@ const wishlistRoutes = require("./routes/wishlistRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 
-const invoiceRoutes =
-  require("./routes/invoiceRoutes");
+const invoiceRoutes = require("./routes/invoiceRoutes");
 
 const connectDB = require("./config/db");
 connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  }),
+);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
@@ -33,8 +38,8 @@ app.use("/api/wishlist", wishlistRoutes);
 
 app.use("/api/upload", uploadRoutes);
 
-app.use("/api/invoice",invoiceRoutes);
-app.use("/api/notifications",notificationRoutes);
+app.use("/api/invoice", invoiceRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 app.use("/api/payment", paymentRoutes);
 app.use("/api/cart", cartRoutes);
