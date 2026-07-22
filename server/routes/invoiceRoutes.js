@@ -4,7 +4,7 @@ const router = express.Router();
 const path = require("path");
 const PDFDocument = require("pdfkit");
 
-const Order = require("../models/Order");
+const Order = require("../models/order");
 
 // ======================================================
 // PROFESSIONAL INVOICE DOWNLOAD
