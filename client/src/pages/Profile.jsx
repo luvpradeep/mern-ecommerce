@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 import { useLocation } from "react-router-dom";
 import {
   FaUserCircle,
@@ -260,14 +260,8 @@ function Profile() {
     try {
       const token = localStorage.getItem("token");
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/users/profile",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const { data } = await api.get(
+        "/users/profile");
 
       const profile = data.user;
 
@@ -304,17 +298,12 @@ function Profile() {
 
       const token = localStorage.getItem("token");
 
-      const { data } = await axios.put(
-        "http://localhost:5000/api/users/profile",
+      const { data } = await api.put(
+        "/users/profile",
         {
           name: name.trim(),
           email: email.trim(),
           phone,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         },
       );
 
@@ -364,18 +353,13 @@ function Profile() {
 
       const token = localStorage.getItem("token");
 
-      const { data } = await axios.put(
-        "http://localhost:5000/api/users/change-password",
+      const { data } = await api.put(
+        "/users/change-password",
         {
           oldPassword,
           newPassword,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+       );
 
       toast.success(data.message);
 
@@ -404,15 +388,9 @@ function Profile() {
 
       const token = localStorage.getItem("token");
 
-      const { data } = await axios.post(
-        "http://localhost:5000/api/users/send-email-otp",
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const { data } = await api.post(
+        "/users/send-email-otp",
+        {}, );
 
       toast.success(data.message);
 
@@ -444,17 +422,12 @@ function Profile() {
 
       const token = localStorage.getItem("token");
 
-      const { data } = await axios.post(
-        "http://localhost:5000/api/users/verify-email-otp",
+      const { data } = await api.post(
+        "/users/verify-email-otp",
         {
           otp,
         },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+        );
 
       toast.success(data.message);
 
@@ -485,8 +458,8 @@ function Profile() {
     try {
       setForgotLoading(true);
 
-      const { data } = await axios.post(
-        "http://localhost:5000/api/users/forgot-password",
+      const { data } = await api.post(
+        "/users/forgot-password",
         {
           email,
         },
@@ -522,8 +495,8 @@ function Profile() {
     try {
       setForgotLoading(true);
 
-      const { data } = await axios.post(
-        "http://localhost:5000/api/users/verify-reset-otp",
+      const { data } = await api.post(
+        "/users/verify-reset-otp",
         {
           email,
           otp: forgotOtp,
@@ -561,8 +534,8 @@ function Profile() {
     try {
       setForgotLoading(true);
 
-      const { data } = await axios.post(
-        "http://localhost:5000/api/users/reset-password",
+      const { data } = await api.post(
+        "/users/reset-password",
         {
           email,
           otp: forgotOtp,

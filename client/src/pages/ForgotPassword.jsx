@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 import {
   FaEnvelope,
@@ -38,8 +38,8 @@ function ForgotPassword() {
     try {
       setLoading(true);
 
-      const { data } = await axios.post(
-        "http://localhost:5000/api/users/forgot-password",
+      const { data } = await api.post(
+        "/users/forgot-password",
         {
           email,
         }

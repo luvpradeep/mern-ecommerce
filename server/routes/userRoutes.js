@@ -64,12 +64,4 @@ router.post(
   verifyEmailOTP
 );
 
-router.get("/profile", protect, (req, res) => {
-  res.json({
-    success: true,
-    message: "Protected Route Accessed",
-    user: req.user,
-  });
-});
-
 module.exports = router;

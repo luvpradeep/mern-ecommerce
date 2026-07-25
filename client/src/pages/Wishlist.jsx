@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { WishlistContext } from "../context/WishlistContext";
 import "./Wishlist.css";
@@ -9,11 +8,8 @@ function Wishlist() {
   const [messageType, setMessageType] = useState("success");
 
   const { addToCart } = useContext(CartContext);
-  const { wishlistItems, fetchWishlist } = useContext(WishlistContext);
 
-  useEffect(() => {
-    fetchWishlist();
-  }, []);
+  const { wishlistItems, toggleWishlist } = useContext(WishlistContext);
 
   const showMessage = (msg, type = "success") => {
     setMessage(msg);
@@ -24,28 +20,36 @@ function Wishlist() {
     }, 3000);
   };
 
-  const removeFromWishlist = async (productId) => {
+  // ==========================
+  // REMOVE
+  // ==========================
+
+  const removeFromWishlist = async (product) => {
     try {
-      const token = localStorage.getItem("token");
+      await toggleWishlist(product);
 
-      await axios.delete(`http://localhost:5000/api/wishlist/${productId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      showMessage("Removed from Wishlist", "error");
+    } catch (err) {
+      console.error(err);
 
-      await fetchWishlist();
-
-      showMessage("Removed from wishlist", "error");
-    } catch (error) {
-      console.log(error);
+      showMessage("Unable to remove product", "error");
     }
   };
 
-  const handleAddToCart = (product) => {
-    addToCart(product);
+  // ==========================
+  // ADD TO CART
+  // ==========================
 
-    showMessage(`${product.name} added to cart`, "success");
+  const handleAddToCart = async (product) => {
+    try {
+      await addToCart(product._id);
+
+      showMessage(`${product.name} added to cart`);
+    } catch (err) {
+      console.error(err);
+
+      showMessage("Unable to add to cart", "error");
+    }
   };
 
   return (
@@ -80,7 +84,7 @@ function Wishlist() {
 
                 <button
                   className="wishlist-remove-btn"
-                  onClick={() => removeFromWishlist(item.product._id)}
+                  onClick={() => removeFromWishlist(item.product)}
                 >
                   Remove
                 </button>

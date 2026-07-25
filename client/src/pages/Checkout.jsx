@@ -70,10 +70,14 @@ function Checkout() {
   // ==========================
 
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("shippingAddress"));
+    try {
+      const saved = JSON.parse(localStorage.getItem("shippingAddress"));
 
-    if (saved) {
-      setAddress(saved);
+      if (saved) {
+        setAddress(saved);
+      }
+    } catch {
+      localStorage.removeItem("shippingAddress");
     }
   }, []);
 
@@ -110,11 +114,11 @@ function Checkout() {
 
   const GST_RATE = 0.05; // 5% GST
 
-  const gst = Number((subtotal * GST_RATE).toFixed());
+  const gst = Number((subtotal * GST_RATE).toFixed(2));
 
   const shipping = subtotal >= 999 ? 0 : 60;
 
-  const total = Number((subtotal + gst + shipping).toFixed());
+  const total = Number((subtotal + gst + shipping).toFixed(2));
 
   // ==========================
   // ADDRESS VALIDATION
@@ -189,15 +193,17 @@ function Checkout() {
         paymentMethod,
 
         paymentInfo,
+
+        itemsPrice: subtotal,
+
+        shippingPrice: shipping,
+
+        taxPrice: gst,
+
+        totalPrice: total,
       };
 
-      const token = localStorage.getItem("token");
-
-      const { data } = await api.post("/orders", orderData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await api.post("/orders", orderData);
 
       if (!data.success) {
         throw new Error(data.message || "Order creation failed");
@@ -206,9 +212,7 @@ function Checkout() {
       // Clear cart only after
       // successful order creation
 
-      await clearCart();
-
-      await fetchNotifications();
+      await Promise.all([clearCart(), fetchNotifications()]);
 
       localStorage.removeItem("shippingAddress");
 
@@ -265,7 +269,9 @@ function Checkout() {
       // CREATE RAZORPAY ORDER
       // --------------------------
 
-      const { data } = await api.post("/payment/create-order");
+      const { data } = await api.post("/payment/create-order", {
+        amount: total,
+      });
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -348,6 +354,11 @@ function Checkout() {
         },
       };
 
+      if (!window.Razorpay) {
+        showMessage("Razorpay SDK not loaded", "error");
+        return;
+      }
+
       const razor = new window.Razorpay(options);
 
       razor.on("payment.failed", function (response) {
@@ -419,16 +430,16 @@ function Checkout() {
                 {cartItems.map((item) => (
                   <div key={item._id} className="checkout-card">
                     <img
-                      src={item.product.image}
-                      alt={item.product.name}
+                      src={item.product?.image}
+                      alt={item.product?.name}
                       className="checkout-image"
                     />
 
                     <div className="checkout-info">
-                      <h3>{item.product.name}</h3>
+                      <h3>{item.product?.name}</h3>
 
                       <p className="checkout-category">
-                        {item.product.category}
+                        {item.product?.category}
                       </p>
 
                       <p className="checkout-qty">
@@ -436,7 +447,7 @@ function Checkout() {
                       </p>
 
                       <h4 className="checkout-price">
-                        ₹{item.product.price.toLocaleString()}
+                        ₹{item.product?.price.toLocaleString()}
                       </h4>
 
                       <p className="checkout-total">

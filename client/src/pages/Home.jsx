@@ -33,6 +33,16 @@ function Home() {
     }
   };
 
+  const changePage = (newPage) => {
+    setPage(newPage);
+
+    setTimeout(() => {
+      document.querySelector(".section-title")?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }, 100);
+  };
+
   return (
     <div className="home-container">
       {/* Hero Section */}
@@ -86,7 +96,7 @@ function Home() {
           <option value="Home">Home</option>
           <option value="Beauty">Beauty</option>
         </select>
-        
+
         <select
           className="filter-select"
           value={sort}

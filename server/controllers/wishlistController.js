@@ -1,4 +1,5 @@
 const Wishlist = require("../models/Wishlist");
+const Product = require("../models/Product");
 
 const addToWishlist = async (req, res) => {
   try {
@@ -17,6 +18,14 @@ const addToWishlist = async (req, res) => {
       });
     }
 
+    const product = await Product.findById(req.params.productId);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
     await Wishlist.create({
       user: req.user._id,
       product: req.params.productId,
@@ -27,7 +36,6 @@ const addToWishlist = async (req, res) => {
       action: "added",
       message: "Added to wishlist",
     });
-
   } catch (error) {
     res.status(500).json({
       message: error.message,

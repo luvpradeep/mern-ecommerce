@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 import {
   FaLock,
@@ -108,8 +108,8 @@ function ResetPassword() {
       setLoading(true);
 
       const { data } =
-        await axios.post(
-          "http://localhost:5000/api/users/reset-password",
+        await api.post(
+          "/users/reset-password",
           {
             email,
             otp,

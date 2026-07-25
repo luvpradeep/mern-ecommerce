@@ -28,7 +28,9 @@ const addToCart = async (req, res) => {
   try {
     const { productId } = req.body;
 
-    const product = await Product.findById(productId);
+    const product = await Product.findById(productId).select(
+    "_id stock price name image"
+);
 
     if (!product) {
       return res.status(404).json({

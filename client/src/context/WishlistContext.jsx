@@ -1,11 +1,5 @@
-import {
-  createContext,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
-
-import axios from "axios";
+import { createContext, useState, useEffect, useCallback } from "react";
+import api from "../services/api";
 
 export const WishlistContext = createContext();
 
@@ -13,97 +7,96 @@ export function WishlistProvider({ children }) {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // ===========================
+  // ==========================
   // TOKEN
-  // ===========================
+  // ==========================
 
-  const getToken = () =>
-    localStorage.getItem("token");
+  const getToken = () => localStorage.getItem("token");
 
-  // ===========================
-  // FETCH
-  // ===========================
+  // ==========================
+  // FETCH WISHLIST
+  // ==========================
 
   const fetchWishlist = useCallback(async () => {
+    const token = getToken();
+
+    if (!token) {
+      setWishlistItems([]);
+      return;
+    }
+
     try {
-      const token = getToken();
-
-      if (!token) {
-        setWishlistItems([]);
-        return;
-      }
-
       setLoading(true);
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/wishlist",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await api.get("/wishlist");
 
-      setWishlistItems(
-        Array.isArray(data) ? data : []
-      );
+      setWishlistItems(Array.isArray(data) ? data : []);
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      setWishlistItems([]);
     } finally {
       setLoading(false);
     }
   }, []);
 
+  // ==========================
+  // LOAD
+  // ==========================
+
   useEffect(() => {
     fetchWishlist();
   }, [fetchWishlist]);
 
-  // ===========================
-  // TOGGLE
-  // ===========================
+  // ==========================
+  // TOGGLE WISHLIST
+  // ==========================
 
-  const toggleWishlist = async (productId) => {
-  try {
+  const toggleWishlist = async (product) => {
     const token = getToken();
 
     if (!token) return;
 
+    const productId = typeof product === "string" ? product : product._id;
+
     const exists = wishlistItems.some(
-      (item) => item.product?._id === productId
+      (item) => item.product?._id === productId,
     );
 
-    if (exists) {
-      await axios.delete(
-        `http://localhost:5000/api/wishlist/${productId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    const backup = [...wishlistItems];
+
+    try {
+      // Optimistic Update
+      if (exists) {
+        setWishlistItems((prev) =>
+          prev.filter((item) => item.product?._id !== productId),
+        );
+
+        await api.delete(`/wishlist/${productId}`);
+      } else {
+        if (typeof product === "object") {
+          setWishlistItems((prev) => [
+            ...prev,
+            {
+              _id: Date.now().toString(),
+              product,
+            },
+          ]);
         }
-      );
-    } else {
-      await axios.post(
-        `http://localhost:5000/api/wishlist/${productId}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+
+        await api.post(`/wishlist/${productId}`);
+      }
+
+      // Sync with server
+      await fetchWishlist();
+    } catch (err) {
+      console.error(err);
+      setWishlistItems(backup);
     }
+  };
 
-    // Refresh wishlist immediately
-    await fetchWishlist();
-
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-  // ===========================
+  // ==========================
   // CLEAR
-  // ===========================
+  // ==========================
 
   const clearWishlist = () => {
     setWishlistItems([]);
@@ -113,16 +106,10 @@ export function WishlistProvider({ children }) {
     <WishlistContext.Provider
       value={{
         loading,
-
         wishlistItems,
-
-        wishlistCount:
-          wishlistItems.length,
-
+        wishlistCount: wishlistItems.length,
         fetchWishlist,
-
         toggleWishlist,
-
         clearWishlist,
       }}
     >

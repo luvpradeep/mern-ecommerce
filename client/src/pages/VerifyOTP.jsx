@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../services/api";
 
 import {
   FaShieldAlt,
@@ -176,9 +176,9 @@ function VerifyOTP() {
 
       setLoading(true);
 
-      await axios.post(
+      await api.post(
 
-        "http://localhost:5000/api/users/forgot-password",
+        "/users/forgot-password",
 
         {
           email,

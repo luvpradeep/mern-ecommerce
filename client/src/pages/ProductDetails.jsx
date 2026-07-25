@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 import { AuthContext } from "../context/AuthContext";
 import { CartContext } from "../context/CartContext";
@@ -24,8 +24,6 @@ function ProductDetails() {
 
   const [qty, setQty] = useState(1);
 
-  const [wishlisted, setWishlisted] = useState(false);
-
   const [loading, setLoading] = useState(true);
 
   const [cartLoading, setCartLoading] = useState(false);
@@ -34,7 +32,7 @@ function ProductDetails() {
 
   const [messageType, setMessageType] = useState("");
 
-  const { fetchWishlist } = useContext(WishlistContext);
+  const { wishlistItems, toggleWishlist } = useContext(WishlistContext);
 
   // -----------------------
   // MESSAGE HELPER
@@ -57,9 +55,10 @@ function ProductDetails() {
     try {
       setLoading(true);
 
-      const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+      const res = await api.get(`/products/${id}`);
 
       setProduct(res.data.product);
+      setQty(1);
 
       // Prefill review
 
@@ -86,25 +85,8 @@ function ProductDetails() {
   // CHECK WISHLIST
   // -----------------------
 
-  const checkWishlist = async () => {
-    if (!user) return;
-
-    try {
-      const token = localStorage.getItem("token");
-
-      const res = await axios.get("http://localhost:5000/api/wishlist", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const exists = res.data.some((item) => item.product._id === id);
-
-      setWishlisted(exists);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const wishlisted =
+    product && wishlistItems.some((item) => item.product?._id === product._id);
 
   // -----------------------
   // REVIEW
@@ -118,20 +100,10 @@ function ProductDetails() {
     }
 
     try {
-      const token = localStorage.getItem("token");
-
-      const res = await axios.post(
-        `http://localhost:5000/api/products/${product._id}/reviews`,
-        {
-          rating,
-          comment,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const res = await api.post(`/products/${product._id}/reviews`, {
+        rating,
+        comment,
+      });
 
       if (res.data.action === "created") {
         showMessage("Review Submitted Successfully ✅");
@@ -155,42 +127,13 @@ function ProductDetails() {
     }
 
     try {
-      const token = localStorage.getItem("token");
+      await toggleWishlist(product);
 
-      if (wishlisted) {
-        await axios.delete(
-          `http://localhost:5000/api/wishlist/${product._id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        setWishlisted(false);
-
-        await fetchWishlist();
-
-        showMessage("Removed from Wishlist 🤍");
-      } else {
-        await axios.post(
-          `http://localhost:5000/api/wishlist/${product._id}`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-
-        setWishlisted(true);
-
-        await fetchWishlist();
-
-        showMessage("Added to Wishlist ❤️");
-      }
+      showMessage(
+        wishlisted ? "Removed from Wishlist 🤍" : "Added to Wishlist ❤️",
+      );
     } catch (error) {
-      showMessage(error.response?.data?.message || "Wishlist Error", "error");
+      showMessage("Wishlist Error", "error");
     }
   };
 
@@ -228,7 +171,9 @@ function ProductDetails() {
 
       showMessage("Added To Cart 🛒");
     } catch (err) {
-      showMessage("Unable To Add Cart", "error");
+      console.error(err);
+
+      showMessage(err.response?.data?.message || "Unable To Add Cart", "error");
     } finally {
       setCartLoading(false);
     }
@@ -240,7 +185,6 @@ function ProductDetails() {
 
   useEffect(() => {
     fetchProduct();
-    checkWishlist();
   }, [id]);
 
   if (loading) {
@@ -314,7 +258,7 @@ function ProductDetails() {
                   : "🛒 Add To Cart"}
             </button>
 
-            <button className="pd-wishlist-btn" onClick={wishlistHandler}>
+            <button className="pd-wishlist-btn"  onClick={wishlistHandler} disabled={!product}>
               {wishlisted ? "🤍 Remove Wishlist" : "❤️ Add Wishlist"}
             </button>
           </div>
