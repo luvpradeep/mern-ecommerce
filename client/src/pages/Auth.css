@@ -218,25 +218,24 @@ input[type="password"]::-ms-clear{
 =================================== */
 
 .eye-btn{
-
-    position:absolute;
-
-    right:15px;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    background:none;
-
-    border:none;
-
-    cursor:pointer;
-
-    color:#555;
-
-    font-size:17px;
-
+position:absolute;
+top:50%;
+right:15px;
+transform:translateY(-50%);
+display:flex;
+align-items:center;
+justify-content:center;
+width:24px;
+height:24px;
+padding:0;
+margin:0;
+border:none;
+background:transparent;
+cursor:pointer;
+color:#64748b;
+font-size:18px;
+line-height:1;
+z-index:2;
 }
 
 /* ===================================
