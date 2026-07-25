@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import "./AdminProductCreate.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -20,8 +20,8 @@ function AdminProductCreate() {
     formData.append("image", e.target.files[0]);
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/upload",
+      const { data } = await api.post(
+        "/upload",
         formData,
         {
           headers: {
@@ -43,10 +43,9 @@ function AdminProductCreate() {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token");
 
-      await axios.post(
-        "http://localhost:5000/api/admin/products",
+      await api.post(
+        "/admin/products",
         {
           name,
           price,
@@ -54,13 +53,7 @@ function AdminProductCreate() {
           category,
           description,
           stock,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+        },);
 
       toast.success("Product added successfully");
       navigate("/admin/products");

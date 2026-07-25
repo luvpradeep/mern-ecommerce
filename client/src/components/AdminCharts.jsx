@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../services/api";
 
 import {
   Chart as ChartJS,
@@ -35,16 +35,8 @@ function AdminCharts() {
 
   const fetchAnalytics = async () => {
     try {
-      const token = localStorage.getItem("token");
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/admin/analytics",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const { data } = await api.get("/admin/analytics");
 
       setAnalytics(data);
     } catch (error) {

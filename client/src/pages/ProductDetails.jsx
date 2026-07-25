@@ -166,7 +166,7 @@ function ProductDetails() {
       setCartLoading(true);
 
       for (let i = 0; i < qty; i++) {
-        await addToCart(product._id);
+        await addToCart(product._id, qty);
       }
 
       showMessage("Added To Cart 🛒");

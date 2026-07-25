@@ -258,7 +258,6 @@ function Profile() {
 
   const fetchProfile = async () => {
     try {
-      const token = localStorage.getItem("token");
 
       const { data } = await api.get(
         "/users/profile");
@@ -295,8 +294,6 @@ function Profile() {
 
     try {
       setLoading(true);
-
-      const token = localStorage.getItem("token");
 
       const { data } = await api.put(
         "/users/profile",
@@ -351,8 +348,6 @@ function Profile() {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem("token");
-
       const { data } = await api.put(
         "/users/change-password",
         {
@@ -386,8 +381,6 @@ function Profile() {
     try {
       setSendingOtp(true);
 
-      const token = localStorage.getItem("token");
-
       const { data } = await api.post(
         "/users/send-email-otp",
         {}, );
@@ -419,8 +412,6 @@ function Profile() {
 
     try {
       setVerifyingOtp(true);
-
-      const token = localStorage.getItem("token");
 
       const { data } = await api.post(
         "/users/verify-email-otp",

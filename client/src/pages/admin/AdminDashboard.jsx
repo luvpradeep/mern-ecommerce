@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import "./AdminDashboard.css";
 import AdminCharts from "../../components/AdminCharts";
 import {
@@ -26,16 +26,8 @@ function AdminDashboard() {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem("token");
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/admin/dashboard",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const { data } = await api.get("/admin/dashboard");
 
       setStats(data);
     } catch (error) {

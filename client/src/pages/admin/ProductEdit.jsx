@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import "./AdminProductCreate.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -21,16 +21,9 @@ function ProductEdit() {
 
   const fetchProduct = async () => {
     try {
-      const token = localStorage.getItem("token");
 
-      const { data } = await axios.get(
-        `http://localhost:5000/api/admin/products/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const { data } = await api.get(
+        `/admin/products/${id}`);
 
       setName(data.product.name);
       setPrice(data.product.price);
@@ -49,8 +42,8 @@ function ProductEdit() {
     formData.append("image", e.target.files[0]);
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/upload",
+      const { data } = await api.post(
+        "/upload",
         formData,
         {
           headers: {
@@ -71,10 +64,9 @@ function ProductEdit() {
     e.preventDefault();
 
     try {
-      const token = localStorage.getItem("token");
 
-      await axios.put(
-        `http://localhost:5000/api/admin/products/${id}`,
+      await api.put(
+        `/admin/products/${id}`,
         {
           name,
           price,
@@ -82,13 +74,7 @@ function ProductEdit() {
           category,
           description,
           stock,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+        },);
 
       toast.success("Product updated");
 

@@ -12,7 +12,6 @@ const getCart = async (req, res) => {
     }).populate("product");
 
     res.status(200).json(cart);
-
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -26,11 +25,11 @@ const getCart = async (req, res) => {
 
 const addToCart = async (req, res) => {
   try {
-    const { productId } = req.body;
+    const { productId, quantity = 1 } = req.body;
 
     const product = await Product.findById(productId).select(
-    "_id stock price name image"
-);
+      "_id stock price name image",
+    );
 
     if (!product) {
       return res.status(404).json({
@@ -50,39 +49,30 @@ const addToCart = async (req, res) => {
     });
 
     if (item) {
-
-      if (item.quantity >= product.stock) {
+      if (item.quantity + quantity > product.stock) {
         return res.status(400).json({
-          message: "Maximum stock reached",
+          message: `Only ${product.stock} item(s) available in stock`,
         });
       }
 
-      item.quantity += 1;
+      item.quantity += quantity;
 
       await item.save();
-
     } else {
-
       item = await Cart.create({
         user: req.user._id,
         product: productId,
-        quantity: 1,
+        quantity,
       });
-
     }
 
-    const populatedItem =
-      await Cart.findById(item._id)
-      .populate("product");
+    const populatedItem = await Cart.findById(item._id).populate("product");
 
     res.status(200).json(populatedItem);
-
   } catch (error) {
-
     res.status(500).json({
       message: error.message,
     });
-
   }
 };
 
@@ -91,9 +81,7 @@ const addToCart = async (req, res) => {
 // ==========================
 
 const updateQuantity = async (req, res) => {
-
   try {
-
     const { quantity } = req.body;
 
     const item = await Cart.findOne({
@@ -123,20 +111,14 @@ const updateQuantity = async (req, res) => {
 
     await item.save();
 
-    const updated =
-      await Cart.findById(item._id)
-      .populate("product");
+    const updated = await Cart.findById(item._id).populate("product");
 
     res.status(200).json(updated);
-
   } catch (error) {
-
     res.status(500).json({
       message: error.message,
     });
-
   }
-
 };
 
 // ==========================
@@ -144,9 +126,7 @@ const updateQuantity = async (req, res) => {
 // ==========================
 
 const removeItem = async (req, res) => {
-
   try {
-
     const item = await Cart.findOneAndDelete({
       _id: req.params.id,
       user: req.user._id,
@@ -162,15 +142,11 @@ const removeItem = async (req, res) => {
       success: true,
       message: "Item removed",
     });
-
   } catch (error) {
-
     res.status(500).json({
       message: error.message,
     });
-
   }
-
 };
 
 // ==========================
@@ -178,9 +154,7 @@ const removeItem = async (req, res) => {
 // ==========================
 
 const clearCart = async (req, res) => {
-
   try {
-
     await Cart.deleteMany({
       user: req.user._id,
     });
@@ -189,15 +163,11 @@ const clearCart = async (req, res) => {
       success: true,
       message: "Cart cleared",
     });
-
   } catch (error) {
-
     res.status(500).json({
       message: error.message,
     });
-
   }
-
 };
 
 module.exports = {

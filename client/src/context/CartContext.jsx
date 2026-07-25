@@ -52,20 +52,15 @@ function CartProvider({ children }) {
   // ==========================
   // ADD TO CART
   // ==========================
+    
+  const addToCart = async (productId, quantity = 1) => {
+  await api.post("/cart", {
+    productId,
+    quantity,
+  });
 
-  const addToCart = async (productId) => {
-    if (!getToken()) return;
-
-    try {
-      await api.post("/cart", {
-        productId,
-      });
-
-      await fetchCart();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  await fetchCart();
+};
 
   // ==========================
   // REMOVE FROM CART

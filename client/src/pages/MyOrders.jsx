@@ -454,7 +454,7 @@ function MyOrders() {
                                   item.image
                                     ? item.image.startsWith("http")
                                       ? item.image
-                                      : `http://localhost:5000${item.image}`
+                                      : `http://import.meta.env.VITE_API_URL${item.image}`
                                     : "/placeholder.png"
                                 }
                                 alt={item.name}
@@ -601,7 +601,7 @@ function MyOrders() {
 
                     <div className="order-actions">
                       <a
-                        href={`http://localhost:5000/api/invoice/${order._id}`}
+                        href={`http://import.meta.env.VITE_API_URL/invoice/${order._id}`}
                         target="_blank"
                         rel="noreferrer"
                         className="invoice-btn"

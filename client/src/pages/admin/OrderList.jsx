@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 import "./OrderList.css";
 import { Fragment } from "react";
 
@@ -48,17 +48,7 @@ function OrderList() {
     try {
       setLoading(true);
 
-      const token = localStorage.getItem("token");
-
-      const { data } = await axios.get(
-        "http://localhost:5000/api/admin/orders",
-
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      const { data } = await api.get("/admin/orders");
 
       const sorted = [...data.orders].sort((a, b) => {
         const finished = ["Delivered", "Cancelled"];
@@ -187,21 +177,13 @@ function OrderList() {
     if (!result.isConfirmed) return;
 
     try {
-      const token = localStorage.getItem("token");
 
-      await axios.put(
-        `http://localhost:5000/api/admin/orders/${id}/status`,
+      await api.put(
+        `/admin/orders/${id}/status`,
 
         {
           orderStatus: status,
-        },
-
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+        },);
 
       toast.success("Order updated");
 
@@ -227,19 +209,11 @@ function OrderList() {
     if (!result.isConfirmed) return;
 
     try {
-      const token = localStorage.getItem("token");
 
-      await axios.put(
-        `http://localhost:5000/api/admin/orders/cancel/${id}`,
+      await api.put(
+        `/admin/orders/cancel/${id}`,
 
-        {},
-
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+        {},);
 
       toast.success("Order cancelled");
 
@@ -505,7 +479,7 @@ function OrderList() {
                                   src={
                                     item.image.startsWith("http")
                                       ? item.image
-                                      : `http://localhost:5000${item.image}`
+                                      : `${import.meta.env.VITE_API_URL}${item.image}`
                                   }
                                   alt={item.name}
                                 />

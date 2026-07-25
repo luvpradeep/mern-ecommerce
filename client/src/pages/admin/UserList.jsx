@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import "./UserList.css";
@@ -21,16 +21,9 @@ function UserList() {
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("token");
 
-      const { data } = await axios.get(
-        "http://localhost:5000/api/admin/users",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await api.get(
+        "/admin/users");
 
       setUsers(data.users);
       setStats(data.stats);
@@ -53,17 +46,10 @@ function UserList() {
     if (!result.isConfirmed) return;
 
     try {
-      const token = localStorage.getItem("token");
 
-      const { data } = await axios.put(
-        `http://localhost:5000/api/admin/users/${id}/admin`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await api.put(
+        `/admin/users/${id}/admin`,
+        {},);
 
       toast.success(data.message);
 
@@ -89,16 +75,9 @@ function UserList() {
     if (!result.isConfirmed) return;
 
     try {
-      const token = localStorage.getItem("token");
 
-      const { data } = await axios.delete(
-        `http://localhost:5000/api/admin/users/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const { data } = await api.delete(
+        `/admin/users/${id}`);
 
       toast.success(data.message);
 

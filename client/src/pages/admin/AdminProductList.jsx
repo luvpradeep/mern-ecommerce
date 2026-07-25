@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import "./AdminProductList.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -40,13 +40,8 @@ function AdminProductList() {
     if (!result.isConfirmed) return;
 
     try {
-      const token = localStorage.getItem("token");
 
-      await axios.delete(`http://localhost:5000/api/admin/products/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await api.delete(`/admin/products/${id}`);
 
       toast.success("Product deleted successfully");
 
@@ -63,16 +58,8 @@ function AdminProductList() {
   }, []);
 
   const fetchProducts = async () => {
-    const token = localStorage.getItem("token");
 
-    const { data } = await axios.get(
-      "http://localhost:5000/api/admin/products",
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
+    const { data } = await api.get("/admin/products");
 
     setProducts(data.products);
     setStats(data.stats);
