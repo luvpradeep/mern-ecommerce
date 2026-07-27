@@ -16,7 +16,7 @@ function Home() {
 
   const [pages, setPages] = useState(1);
 
-  const productsRef = useRef(null);
+  const searchRef = useRef(null);
 
   useEffect(() => {
     fetchProducts();
@@ -69,7 +69,7 @@ function Home() {
       </div>
 
       {/* Search & Filters */}
-      <div className="search-filter">
+      <div ref={searchRef} className="search-filter">
         <input
           className="search-input search"
           type="text"
@@ -116,7 +116,7 @@ function Home() {
       </div>
 
       {/* Product Title */}
-      <h2 ref={productsRef} className="section-title">
+      <h2 className="section-title">
         Featured Products
       </h2>
 
