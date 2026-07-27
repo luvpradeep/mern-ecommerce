@@ -1,4 +1,8 @@
 const nodemailer = require("nodemailer");
+const dns = require("dns");
+
+// Force Node.js to prefer IPv4 over IPv6 to prevent ENETUNREACH errors
+dns.setDefaultResultOrder("ipv4first");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -37,7 +41,6 @@ const sendEmail = async (to, subject, html) => {
   } catch (err) {
     console.error("MAIL ERROR:");
     console.error(err);
-
     throw err;
   }
 };
