@@ -22,20 +22,12 @@ connectDB();
 const app = express();
 
 const allowedOrigins = [
-  "http://localhost:5173",
   "https://mern-ecommerce-henna-omega.vercel.app",
-  "https://mern-ecommerce-rc0he4igj-luvpradeeps-projects.vercel.app",
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "https://mern-ecommerce-henna-omega.vercel.app",
     credentials: true,
   })
 );
