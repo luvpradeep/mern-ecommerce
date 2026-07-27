@@ -28,17 +28,13 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Authentication
-  const { logout } = useContext(AuthContext);
-
-  const { resetCart } = useContext(CartContext);
-
-  const { resetWishlist } = useContext(WishlistContext);
+  const { user, logout } = useContext(AuthContext);
 
   // Cart
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, resetCart } = useContext(CartContext);
 
   // Wishlist
-  const { wishlistItems, wishlistCount } = useContext(WishlistContext);
+  const { wishlistCount, resetWishlist } = useContext(WishlistContext);
 
   // Notifications
   const { unreadCount } = useContext(NotificationContext);
@@ -47,16 +43,16 @@ function Navbar() {
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleLogout = () => {
-  resetCart();
+    resetCart();
 
-  resetWishlist();
+    resetWishlist();
 
-  logout();
+    logout();
 
-  navigate("/login");
+    navigate("/login");
 
-  setMenuOpen(false);
-};
+    setMenuOpen(false);
+  };
 
   return (
     <>
