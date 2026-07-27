@@ -1,24 +1,36 @@
-const { Resend } = require('resend');
-
-// Initialize Resend with your API Key
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const sendEmail = async (to, subject, html) => {
   try {
-    // Send the email via standard HTTP (port 443) which Render allows
-    const { data, error } = await resend.emails.send({
-      from: 'MERN Shop <onboarding@resend.dev>', // Resend's default testing domain
-      to: [to], 
-      subject: subject,
-      html: html,
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "accept": "application/json",
+        "api-key": process.env.BREVO_API_KEY,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        sender: {
+          name: "MERN Shop",
+          // This MUST exactly match the email you verified in Brevo
+          email: "mernshop5@gmail.com" 
+        },
+        to: [
+          {
+            // The user's email passed in from your forgot-password route
+            email: to, 
+          }
+        ],
+        subject: subject,
+        htmlContent: html,
+      })
     });
 
-    if (error) {
-      console.error("RESEND API ERROR:", error);
-      throw new Error(error.message);
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to send email via Brevo");
     }
 
-    console.log("Email sent successfully via HTTP:", data);
+    console.log("Email sent successfully via Brevo HTTP:", data);
   } catch (err) {
     console.error("MAIL ERROR DETAILS:", err);
     throw err;
