@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import api from "../services/api";
 import "./MyOrders.css";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
 import jsPDF from "jspdf";
@@ -184,28 +182,26 @@ function MyOrders() {
     });
 
     autoTable(doc, {
-  startY: 35,
+      startY: 35,
 
-  head: [
-    ["Order ID", "Product", "Qty", "Price", "Total", "Status"],
-  ],
+      head: [["Order ID", "Product", "Qty", "Price", "Total", "Status"]],
 
-  body: rows,
+      body: rows,
 
-  styles: {
-    font: "NotoSans-Regular",
-    fontSize: 10,
-    cellPadding: 4,
-  },
+      styles: {
+        font: "NotoSans-Regular",
+        fontSize: 10,
+        cellPadding: 4,
+      },
 
-  headStyles: {
-    font: "NotoSans-Bold",
-    fillColor: [37, 99, 235],
-    textColor: 255,
-  },
+      headStyles: {
+        font: "NotoSans-Bold",
+        fillColor: [37, 99, 235],
+        textColor: 255,
+      },
 
-  theme: "grid",
-});
+      theme: "grid",
+    });
 
     doc.save("MyOrders.pdf");
   };
@@ -454,7 +450,7 @@ function MyOrders() {
                                   item.image
                                     ? item.image.startsWith("http")
                                       ? item.image
-                                      : `http://import.meta.env.VITE_API_URL${item.image}`
+                                      : `${import.meta.env.VITE_API_URL}${item.image}`
                                     : "/placeholder.png"
                                 }
                                 alt={item.name}
@@ -601,7 +597,7 @@ function MyOrders() {
 
                     <div className="order-actions">
                       <a
-                        href={`http://import.meta.env.VITE_API_URL/invoice/${order._id}`}
+                        href={`${import.meta.env.VITE_API_URL}/invoice/${order._id}`}
                         target="_blank"
                         rel="noreferrer"
                         className="invoice-btn"
