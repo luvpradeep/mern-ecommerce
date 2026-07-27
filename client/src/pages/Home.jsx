@@ -39,7 +39,7 @@ function Home() {
     setPage(newPage);
 
     setTimeout(() => {
-      productsRef.current?.scrollIntoView({
+      searchRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
@@ -116,9 +116,7 @@ function Home() {
       </div>
 
       {/* Product Title */}
-      <h2 className="section-title">
-        Featured Products
-      </h2>
+      <h2 className="section-title">Featured Products</h2>
 
       {/* Products */}
       <div className="products-grid">
