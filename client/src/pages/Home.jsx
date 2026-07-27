@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../services/api";
 import ProductCard from "../components/ProductCard";
 import "./Home.css";
@@ -15,6 +15,8 @@ function Home() {
   const [page, setPage] = useState(1);
 
   const [pages, setPages] = useState(1);
+
+  const productsRef = useRef(null);
 
   useEffect(() => {
     fetchProducts();
@@ -37,8 +39,9 @@ function Home() {
     setPage(newPage);
 
     setTimeout(() => {
-      document.querySelector(".section-title")?.scrollIntoView({
+      productsRef.current?.scrollIntoView({
         behavior: "smooth",
+        block: "start",
       });
     }, 100);
   };
@@ -113,7 +116,9 @@ function Home() {
       </div>
 
       {/* Product Title */}
-      <h2 className="section-title">Featured Products</h2>
+      <h2 ref={productsRef} className="section-title">
+        Featured Products
+      </h2>
 
       {/* Products */}
       <div className="products-grid">
@@ -128,7 +133,7 @@ function Home() {
           <button
             key={x + 1}
             className={page === x + 1 ? "page-btn active-page" : "page-btn"}
-            onClick={() => setPage(x + 1)}
+            onClick={() => changePage(x + 1)}
           >
             {x + 1}
           </button>
