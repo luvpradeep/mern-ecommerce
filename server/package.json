@@ -23,10 +23,8 @@
     "mongodb": "^7.3.0",
     "mongoose": "^9.7.1",
     "multer": "^2.2.0",
-    "nodemailer": "^9.0.3",
     "pdfkit": "^0.19.1",
     "razorpay": "^2.9.6",
-    "resend": "^6.18.0",
     "validator": "^13.15.35"
   },
   "devDependencies": {

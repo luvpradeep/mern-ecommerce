@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
+import { CartContext } from "../context/CartContext";
+import { WishlistContext } from "../context/WishlistContext";
+import { NotificationContext } from "../context/NotificationContext";
 
 import {
   FaEnvelope,
@@ -17,6 +20,9 @@ function Login() {
   const navigate = useNavigate();
 
   const { login } = useContext(AuthContext);
+  const { fetchCart } = useContext(CartContext);
+  const { fetchWishlist } = useContext(WishlistContext);
+  const { fetchNotifications } = useContext(NotificationContext);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -42,103 +48,66 @@ function Login() {
     e.preventDefault();
 
     try {
-
       setLoading(true);
 
-      const res = await api.post(
-        "/users/login",
-        formData
-      );
+      const res = await api.post("/users/login", formData);
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+      localStorage.setItem("token", res.data.token);
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(res.data.user)
-      );
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      localStorage.setItem(
-        "role",
-        res.data.user.role
-      );
+      localStorage.setItem("role", res.data.user.role);
 
-      login(
-        res.data.user,
-        res.data.token
-      );
+      login(res.data.user, res.data.token);
+      await fetchCart();
+
+      await fetchWishlist();
+
+      await fetchNotifications();
 
       setMessage("Login Successful");
 
       setMessageType("success");
 
       setTimeout(() => {
-
-        if(res.data.user.role==="admin"){
+        if (res.data.user.role === "admin") {
           navigate("/admin");
-        }else{
+        } else {
           navigate("/");
         }
-
-      },1000);
-
+      }, 1000);
     } catch (err) {
-
-      setMessage(
-        err.response?.data?.message ||
-        "Login Failed"
-      );
+      setMessage(err.response?.data?.message || "Login Failed");
 
       setMessageType("error");
-
     } finally {
-
       setLoading(false);
-
     }
   };
 
   return (
     <div className="auth-page">
-
       <div className="auth-left">
-
-        <FaShoppingBag className="auth-logo"/>
+        <FaShoppingBag className="auth-logo" />
 
         <h1>MERN Shop</h1>
 
         <p>
-
-          Shop smarter with secure login,
-          wishlist, orders and fast checkout.
-
+          Shop smarter with secure login, wishlist, orders and fast checkout.
         </p>
-
       </div>
 
       <div className="auth-right">
-
         <div className="auth-card">
-
           <h2>Welcome Back 👋</h2>
 
-          <p>
-            Login to continue shopping
-          </p>
+          <p>Login to continue shopping</p>
 
-          {message && (
-            <div className={`message ${messageType}`}>
-              {message}
-            </div>
-          )}
+          {message && <div className={`message ${messageType}`}>{message}</div>}
 
           <form onSubmit={handleSubmit}>
-
             <div className="auth-input">
-
-              <FaEnvelope/>
+              <FaEnvelope />
 
               <input
                 type="email"
@@ -148,19 +117,13 @@ function Login() {
                 onChange={handleChange}
                 required
               />
-
             </div>
 
             <div className="auth-input">
-
-              <FaLock/>
+              <FaLock />
 
               <input
-                type={
-                  showPassword
-                    ? "text"
-                    : "password"
-                }
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 value={formData.password}
@@ -171,59 +134,29 @@ function Login() {
               <button
                 type="button"
                 className="eye-btn"
-                onClick={()=>
-                  setShowPassword(!showPassword)
-                }
+                onClick={() => setShowPassword(!showPassword)}
               >
-                {
-                  showPassword
-                  ? <FaEyeSlash/>
-                  : <FaEye/>
-                }
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
-
             </div>
 
             <div className="auth-options">
-
-              <Link
-                to="/forgot-password"
-                className="forgot-link"
-              >
+              <Link to="/forgot-password" className="forgot-link">
                 Forgot Password?
               </Link>
-
             </div>
 
-            <button
-              className="auth-btn"
-              disabled={loading}
-            >
-              {
-                loading
-                ? "Logging in..."
-                : "Login"
-              }
+            <button className="auth-btn" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
             </button>
-
           </form>
 
           <p className="auth-footer">
-
             Don't have an account?
-
-            <Link to="/register">
-
-              Register
-
-            </Link>
-
+            <Link to="/register">Register</Link>
           </p>
-
         </div>
-
       </div>
-
     </div>
   );
 }

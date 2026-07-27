@@ -3,7 +3,10 @@ import {
   useEffect,
   useState,
   useCallback,
+  useContext,
 } from "react";
+
+import { AuthContext } from "./AuthContext";
 
 import api from "../services/api";
 
@@ -12,6 +15,7 @@ export const NotificationContext = createContext();
 function NotificationProvider({ children }) {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(AuthContext);
 
   // ==============================
   // Fetch Notifications
@@ -36,8 +40,12 @@ function NotificationProvider({ children }) {
   }, []);
 
   useEffect(() => {
+  if (user) {
     fetchNotifications();
-  }, [fetchNotifications]);
+  } else {
+    setNotifications([]);
+  }
+}, [user, fetchNotifications]);
 
   // ==============================
   // Computed Badge Count

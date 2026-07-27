@@ -1,4 +1,12 @@
-import { createContext, useState, useEffect, useCallback } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from "react";
+
+import { AuthContext } from "./AuthContext";
 import api from "../services/api";
 import { toast } from "react-toastify";
 
@@ -8,6 +16,7 @@ function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [updatingItems, setUpdatingItems] = useState([]);
+  const { user } = useContext(AuthContext);
 
   // ==========================
   // TOKEN
@@ -46,21 +55,25 @@ function CartProvider({ children }) {
   // ==========================
 
   useEffect(() => {
+  if (user) {
     fetchCart();
-  }, [fetchCart]);
+  } else {
+    setCartItems([]);
+  }
+}, [user, fetchCart]);
 
   // ==========================
   // ADD TO CART
   // ==========================
-    
-  const addToCart = async (productId, quantity = 1) => {
-  await api.post("/cart", {
-    productId,
-    quantity,
-  });
 
-  await fetchCart();
-};
+  const addToCart = async (productId, quantity = 1) => {
+    await api.post("/cart", {
+      productId,
+      quantity,
+    });
+
+    await fetchCart();
+  };
 
   // ==========================
   // REMOVE FROM CART
@@ -192,6 +205,10 @@ function CartProvider({ children }) {
     }
   };
 
+  const resetCart = () => {
+  setCartItems([]);
+};
+
   return (
     <CartContext.Provider
       value={{
@@ -204,6 +221,7 @@ function CartProvider({ children }) {
         increaseQty,
         decreaseQty,
         clearCart,
+        resetCart,
       }}
     >
       {children}

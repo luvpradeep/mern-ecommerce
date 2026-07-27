@@ -28,7 +28,11 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Authentication
-  const { user, logout } = useContext(AuthContext);
+  const { logout } = useContext(AuthContext);
+
+  const { resetCart } = useContext(CartContext);
+
+  const { resetWishlist } = useContext(WishlistContext);
 
   // Cart
   const { cartItems } = useContext(CartContext);
@@ -43,12 +47,16 @@ function Navbar() {
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleLogout = () => {
-    logout();
+  resetCart();
 
-    navigate("/login");
+  resetWishlist();
 
-    setMenuOpen(false);
-  };
+  logout();
+
+  navigate("/login");
+
+  setMenuOpen(false);
+};
 
   return (
     <>

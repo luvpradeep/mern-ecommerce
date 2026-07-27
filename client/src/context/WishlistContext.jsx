@@ -1,4 +1,12 @@
-import { createContext, useState, useEffect, useCallback } from "react";
+import {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from "react";
+
+import { AuthContext } from "./AuthContext";
 import api from "../services/api";
 
 export const WishlistContext = createContext();
@@ -6,6 +14,7 @@ export const WishlistContext = createContext();
 export function WishlistProvider({ children }) {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { user } = useContext(AuthContext);
 
   // ==========================
   // TOKEN
@@ -44,8 +53,12 @@ export function WishlistProvider({ children }) {
   // ==========================
 
   useEffect(() => {
+  if (user) {
     fetchWishlist();
-  }, [fetchWishlist]);
+  } else {
+    setWishlistItems([]);
+  }
+}, [user, fetchWishlist]);
 
   // ==========================
   // TOGGLE WISHLIST
@@ -98,9 +111,9 @@ export function WishlistProvider({ children }) {
   // CLEAR
   // ==========================
 
-  const clearWishlist = () => {
-    setWishlistItems([]);
-  };
+  const resetWishlist = () => {
+  setWishlistItems([]);
+};
 
   return (
     <WishlistContext.Provider
@@ -110,7 +123,7 @@ export function WishlistProvider({ children }) {
         wishlistCount: wishlistItems.length,
         fetchWishlist,
         toggleWishlist,
-        clearWishlist,
+        resetWishlist,
       }}
     >
       {children}
