@@ -135,6 +135,44 @@ mern-ecommerce/
 
 ## 📸 Screenshots
 
+### 🔐 Login Page
+
+Displays:
+
+- User login
+- JWT authentication
+- Remember me functionality
+- Forgot password link
+
+<img src="./screenshots/login.png" width="100%">
+
+---
+
+### 📝 Register Page
+
+Displays:
+
+- User registration
+- Name, email, and password validation
+- OTP verification
+- Responsive design
+
+<img src="./screenshots/register.png" width="100%">
+
+---
+
+### 🔑 Forgot Password Page
+
+Displays:
+
+- Email verification
+- OTP generation
+- Password reset
+
+<img src="./screenshots/forgot-password.png" width="100%">
+
+---
+
 ### 🏠 Home Page
 
 Displays:
@@ -197,6 +235,7 @@ Displays:
 - Razorpay integration
 
 <img src="./screenshots/checkout.png" width="100%">
+<img src="./screenshots/checkout1.png" width="100%">
 
 ---
 
@@ -233,7 +272,8 @@ Displays:
 - Invoice download
 
 <img src="./screenshots/orders.png" width="100%">
-
+<img src="./screenshots/orders1.png" width="100%">
+<img src="./screenshots/orders2.png" width="100%">
 ---
 
 ### 👨‍💼 Admin Dashboard
@@ -246,6 +286,7 @@ Displays:
 - Order statistics
 
 <img src="./screenshots/admin-dashboard.png" width="100%">
+<img src="./screenshots/admin-dashboard1.png" width="100%">
 
 ---
 
@@ -258,6 +299,8 @@ Displays:
 - Delete products
 
 <img src="./screenshots/admin-products.png" width="100%">
+<img src="./screenshots/admin-products1.png" width="100%">
+<img src="./screenshots/admin-products2.png" width="100%">
 
 ---
 
@@ -269,6 +312,18 @@ Displays:
 - Change order status
 
 <img src="./screenshots/admin-orders.png" width="100%">
+
+---
+
+### 📋 Admin User Management
+
+Displays:
+
+- View Users
+- Change User to Admin
+- Delete User
+
+<img src="./screenshots/admin-user.png" width="100%">
 
 ---
 
