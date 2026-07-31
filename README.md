@@ -101,12 +101,11 @@ https://github.com/luvpradeep/mern-ecommerce
 
 ## ☁️ Deployment
 
-| Service | Platform |
-|----------|------------|
-| Frontend | Vercel |
-| Backend | Render |
-| Database | MongoDB Atlas |
-| Image Storage | Cloudinary |
+
+- Frontend | Vercel
+- Backend | Render
+- Database | MongoDB Atlas
+- Image Storage | Cloudinary
 
 ---
 
