@@ -10,11 +10,11 @@ This project provides a complete online shopping experience, including authentic
 
 🌐 Frontend
 
-https://your-frontend-url.vercel.app
+https://mern-ecommerce-henna-omega.vercel.app
 
 ⚙️ Backend API
 
-https://your-backend-url.onrender.com
+https://mern-ecommerce-api-ymst.onrender.com
 
 📦 GitHub Repository
 
