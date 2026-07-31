@@ -8,11 +8,17 @@ This project provides a complete online shopping experience, including authentic
 
 ## 🚀 Live Demo
 
-### Frontend
-Coming Soon
+🌐 Frontend
 
-### Backend API
-Coming Soon
+https://your-frontend-url.vercel.app
+
+⚙️ Backend API
+
+https://your-backend-url.onrender.com
+
+📦 GitHub Repository
+
+https://github.com/luvpradeep/mern-ecommerce
 
 ---
 
@@ -93,10 +99,14 @@ Coming Soon
 
 ---
 
-### Deployment
+## ☁️ Deployment
 
-- Render
-- Vercel
+| Service | Platform |
+|----------|------------|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | MongoDB Atlas |
+| Image Storage | Cloudinary |
 
 ---
 
@@ -452,7 +462,7 @@ VITE_RAZORPAY_KEY=
 
 ## 👨‍💻 Author
 
-### Pradeep Dinakaran
+### Pradeep D
 
 Frontend Developer | MERN Stack Developer
 
